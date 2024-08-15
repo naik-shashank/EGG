@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Replace 'your-api-endpoint' with the actual API endpoint
-    axios.get('http://egg-8v9i.onrender.com/admin/egg-bucket-b2b/dashboard')
+    axios.get('https://egg-8v9i.onrender.com/admin/egg-bucket-b2b/dashboard')
       .then(response => {
         setSummary(response.data);
       })
