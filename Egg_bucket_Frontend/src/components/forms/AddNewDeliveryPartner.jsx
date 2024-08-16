@@ -18,7 +18,7 @@ const AddNewDeliveryPartner = () => {
   useEffect(() => {
     const generatePassword = () => {
       const timestamp = Date.now();
-      return `DP_${timestamp}`;
+      return `DP_${timestamp%1000}`;
     };
     setFormData(prevState => ({
       ...prevState,
