@@ -134,6 +134,7 @@ const DeliveryPartnerDetails = () => {
                 <th className="text-left p-2 text-sm font-semibold text-gray-600">PHONE NO</th>
                 <th className="text-left p-2 text-sm font-semibold text-gray-600">DRIVER LICENSE</th>
                 <th className="text-left p-2 text-sm font-semibold text-gray-600">PHOTO</th>
+                <th className="text-left p-2 text-sm font-semibold text-gray-600">PASSWORD</th>
                 <th className="text-left p-2 text-sm font-semibold text-gray-600">ACTIONS</th>
               </tr>
             </thead>
@@ -147,6 +148,7 @@ const DeliveryPartnerDetails = () => {
                   <td className="text-left p-2 text-sm text-gray-600">
                     <img src={partner.img} alt={partner.firstName} className="w-12 h-12 object-cover rounded-md" />
                   </td>
+                   <td className="text-left p-2 text-sm text-gray-600">{partner.password || 'N/A'}</td>
                   <td className="text-left p-2 text-sm text-gray-600">
                     <button className='text-purple-600' onClick={() => handleEditClick(partner)}>
                       <Edit className='w-5 h-5'/>
