@@ -3,7 +3,7 @@ import { Camera } from 'lucide-react';
 
 const AddNewCustomer = () => {
   const [formData, setFormData] = useState({
-    customerId: '',
+    customerId: '1',
     customerName: '',
     businessName: '',
     locationUrl: '',
@@ -18,21 +18,21 @@ const AddNewCustomer = () => {
 
   useEffect(() => {
     // Fetch all outlets
-    fetch('https://egg-8v9i.onrender.com/egg-bucket-b2b/get-all-outlets')
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success' && data.data.length > 0) {
-          const latestOutletNumber = Math.max(...data.data.map(outlet => parseInt(outlet.outletNumber)));
-          setFormData(prevState => ({
-            ...prevState,
-            outlet: latestOutletNumber + 1
-          }));
-        }
-      })
-      .catch(error => console.error('Error fetching outlets:', error));
+    // fetch('http://127.0.0.1:3577/egg-bucket-b2b/get-all-outlets')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.status === 'success' && data.data.length > 0) {
+    //       const latestOutletNumber = Math.max(...data.data.map(outlet => (outlet.outletNumber).toString()));
+    //       setFormData(prevState => ({
+    //         ...prevState,
+    //         outlet: latestOutletNumber + 1
+    //       }));
+    //     }
+    //   })
+    //   .catch(error => console.error('Error fetching outlets:', error));
 
     // Fetch all customers
-    fetch('https://egg-8v9i.onrender.com/customers/egg-bucket-b2b/getAllCustomer')
+    fetch('http://127.0.0.1:3577/customers/egg-bucket-b2b/getAllCustomer')
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
@@ -43,11 +43,17 @@ const AddNewCustomer = () => {
             customerId: latestCustomerId + 1
           }));
         }
+        else{
+          setFormData(prevState => ({
+            ...prevState,
+            customerId: 1
+          }));
+        }
       })
       .catch(error => console.error('Error fetching customers:', error));
 
     // Fetch all outlets for dropdown
-    fetch('https://egg-8v9i.onrender.com/egg-bucket-b2b/get-all-outlets')
+    fetch('http://127.0.0.1:3577/egg-bucket-b2b/get-all-outlets')
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
@@ -99,9 +105,9 @@ const AddNewCustomer = () => {
     if (formData.img) {
       formDataToSend.append('img', formData.img);
     }
-
-    // Submit form data
-    fetch('https://egg-8v9i.onrender.com/customers/egg-bucket-b2b/create-customer', {
+    console.log([...formDataToSend])
+    //Submit form data
+    fetch('http://127.0.0.1:3577/customers/egg-bucket-b2b/create-customer', {
       method: 'POST',
       body: formDataToSend
     })
@@ -109,6 +115,7 @@ const AddNewCustomer = () => {
       .then(data => {
         if (data) {
           alert('Customer added successfully');
+          console.log(data)
           window.location.reload()
           // Reset form or redirect as needed
         } else {
@@ -224,12 +231,18 @@ const AddNewCustomer = () => {
               className="w-full p-2 border border-gray-300 rounded-md"
               required
             >
-              <option value="" disabled>Select Outlet</option>
+              {/* <option value="" disabled>Select Outlet</option>
               {outlets.map(outlet => (
                 <option key={outlet._id} value={outlet._id}>
                   {outlet.outletNumber}
                 </option>
-              ))}
+              ))} */}
+               <option value="" disabled>Select Outlet</option>  //outletNumber
+    {outlets.map(outlet => (
+      <option key={outlet._id} value={outlet._id}>
+        {outlet.outletArea}  
+      </option>
+    ))}
             </select>
           </div>
         </div>
