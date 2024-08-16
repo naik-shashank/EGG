@@ -3,7 +3,7 @@ import { Camera } from 'lucide-react';
 
 const generatePassword = () => {
   // Function to generate a random unique password
-  return 'FB_' + Math.floor(1000000 + Math.random() * 9000000);
+  return 'FB_' + ((Math.floor(1000000 + Math.random() * 9000000))+1000)%1000;
 };
 
 const AddNewOutletPartner = () => {
