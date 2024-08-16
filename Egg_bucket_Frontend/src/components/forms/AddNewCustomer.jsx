@@ -36,17 +36,17 @@ const AddNewCustomer = () => {
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
-          const latestCustomerId = Math.max(...data.map(customer => parseInt(customer.customerId)));
+          const latestCustomerId = Math.max(...data.map(customer => parseInt(customer.customerId.split('_')[1])));
           setCustomerId(latestCustomerId + 1);
           setFormData(prevState => ({
             ...prevState,
-            customerId: latestCustomerId + 1
+            customerId: `EB_${latestCustomerId +1}`
           }));
         }
         else{
           setFormData(prevState => ({
             ...prevState,
-            customerId: 1
+            customerId: "EB_1"
           }));
         }
       })
